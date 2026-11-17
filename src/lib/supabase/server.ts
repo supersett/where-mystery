@@ -1,0 +1,27 @@
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
+import { env } from '@/env';
+import type { Database } from '@/types/database';
+
+export async function createClient() {
+  const cookieStore = await cookies();
+
+  return createServerClient<Database>(
+    env.NEXT_PUBLIC_SUPABASE_URL,
+    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    {
+      cookies: {
+        getAll: () => cookieStore.getAll(),
+        setAll: (items) => {
+          try {
+            items.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options),
+            );
+          } catch {
+            // Server Component에서 호출된 경우 무시 (세션 갱신은 proxy.ts에서 처리)
+          }
+        },
+      },
+    },
+  );
+}
