@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: '머미맵 - 머더미스터리 매장 지도',
+  title: '머미! 어디가?',
   description:
     '어떤 매장이 어떤 머더미스터리를 보유하고 있는지 한눈에 검색하세요.',
 };

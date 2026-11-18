@@ -156,7 +156,7 @@ export function SearchView({ initial }: Props) {
         <h1 className="shrink-0">
           <Image
             src="/brand/logo-mumi.svg"
-            alt="머미맵"
+            alt="머미! 어디가?"
             width={92}
             height={48}
             priority
