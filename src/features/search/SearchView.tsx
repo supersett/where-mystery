@@ -28,12 +28,15 @@ type Props = { initial: { themes: ThemeResult[]; stores: StoreResult[] } };
 export function SearchView({ initial }: Props) {
   const [f, setF] = useQueryStates(searchParsers);
   const {
-    view,
+    // 지금은 지도 뷰만 제공한다(리스트 토글 제거). URL에 view=list가 있어도 무시
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    view: _view,
     theme: themeParam,
     store: storeParam,
     tab: tabParam,
     ...filters
   } = f;
+  const view = 'map' as 'map' | 'list';
   const [selectedStoreId, setSelectedStoreId] = useState<string | null>(null);
   const [panelOpen, setPanelOpen] = useState(true);
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -149,36 +152,25 @@ export function SearchView({ initial }: Props) {
 
   return (
     <div className="flex h-dvh flex-col">
-      <header className="relative z-20 flex flex-wrap items-center gap-3 bg-white px-4 py-3">
+      <header className="relative z-20 flex flex-wrap items-center gap-3 bg-background px-4 py-3 md:grid md:grid-cols-[1fr_minmax(360px,780px)_1fr] md:gap-6 md:px-6">
         <h1 className="shrink-0">
           <Image
             src="/brand/logo-mumi.svg"
             alt="머미맵"
-            width={77}
-            height={40}
+            width={92}
+            height={48}
             priority
             unoptimized // SVG는 이미 벡터라 최적화 변환이 필요 없다
-            className="h-10 w-auto"
+            className="h-10 w-auto md:h-12"
           />
         </h1>
         {/* 데스크톱: 상단 검색 / 모바일: 화면 맨 아래로 이동 */}
-        <div className="hidden flex-1 justify-center md:flex">{pill}</div>
-        <div className="ml-auto flex items-center gap-3 text-sm md:ml-0">
+        <div className="hidden justify-center md:flex">{pill}</div>
+        <div className="ml-auto flex items-center gap-3 text-sm md:justify-self-end">
           <ThemeToggle />
           <span className="hidden text-neutral-500 sm:inline">
             {isFetching ? '검색 중…' : `${stores.length}개 매장`}
           </span>
-          <div className="flex overflow-hidden rounded-full border border-neutral-300">
-            {(['map', 'list'] as const).map((v) => (
-              <button
-                key={v}
-                onClick={() => setF({ view: v })}
-                className={`px-4 py-1.5 ${view === v ? 'bg-neutral-900 text-white' : 'bg-white'}`}
-              >
-                {v === 'map' ? '지도' : '리스트'}
-              </button>
-            ))}
-          </div>
         </div>
       </header>
 
@@ -189,7 +181,7 @@ export function SearchView({ initial }: Props) {
       <div className="relative flex min-h-0 flex-1 flex-col">
         {view === 'map' ? (
           <aside
-            className={`order-1 min-h-0 flex-1 bg-white md:absolute md:top-4 md:bottom-4 md:left-4 md:z-10 md:w-[392px] md:flex-none md:overflow-hidden md:rounded-3xl md:shadow-xl md:transition-transform md:duration-200 ${
+            className={`order-1 min-h-0 flex-1 bg-background md:absolute md:top-4 md:bottom-4 md:left-4 md:z-10 md:w-[392px] md:flex-none md:overflow-hidden md:rounded-3xl md:shadow-xl md:transition-transform md:duration-200 ${
               panelOpen ? '' : 'md:-translate-x-[calc(100%+1rem)]'
             }`}
           >
@@ -223,7 +215,7 @@ export function SearchView({ initial }: Props) {
               <button
                 onClick={() => setPanelOpen((o) => !o)}
                 aria-label={panelOpen ? '패널 접기' : '패널 열기'}
-                className={`absolute top-1/2 z-10 hidden h-12 w-6 -translate-y-1/2 items-center justify-center rounded-r-xl bg-white shadow-md hover:bg-neutral-50 md:flex ${
+                className={`absolute top-1/2 z-10 hidden h-12 w-6 -translate-y-1/2 items-center justify-center rounded-r-xl bg-background shadow-md hover:bg-neutral-50 md:flex ${
                   panelOpen ? 'left-[408px]' : 'left-0'
                 }`}
               >
@@ -241,7 +233,7 @@ export function SearchView({ initial }: Props) {
       </div>
 
       {/* 모바일: 하단에는 검색 "열기 버튼"만 두고, 누르면 전체 화면 검색 모드 */}
-      <div className="relative z-20 rounded-t-3xl bg-white px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-10px_28px_-14px_rgba(0,0,0,0.22)] md:hidden">
+      <div className="relative z-20 rounded-t-3xl bg-background px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-10px_28px_-14px_rgba(0,0,0,0.22)] md:hidden">
         <SearchLauncher onOpen={() => setSearchOpen(true)} />
       </div>
       {isMobile && searchOpen ? (

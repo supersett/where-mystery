@@ -31,8 +31,10 @@ export function StoreCard({
   return (
     <div
       data-store-id={store.id}
-      className={`flex items-center gap-1 rounded-2xl transition hover:bg-neutral-100 ${
-        active ? 'bg-primary-50 ring-primary-300 ring-1' : 'bg-neutral-50'
+      className={`flex items-center gap-1 rounded-2xl border transition ${
+        active
+          ? 'bg-primary-50 border-primary-300'
+          : 'border-neutral-200 bg-white shadow-[0_1px_2px_rgba(60,40,10,0.04)] hover:bg-neutral-50'
       }`}
     >
       <div className="min-w-0 flex-1 py-3 pl-3">
@@ -58,17 +60,12 @@ export function StoreCard({
         {/* 이 매장이 보유한 머미 목록으로 */}
         <button
           onClick={onViewThemes}
-          className="text-primary-700 hover:text-primary-600 mt-1 flex max-w-full items-center gap-0.5 text-sm font-medium"
+          className="text-primary-700 hover:text-primary-600 mt-2.5 flex max-w-full items-center gap-0.5 text-sm font-semibold"
         >
           <span className="truncate">
-            머미 {store.total_theme_count}개
-            {filtered ? (
-              <>
-                {' · '}
-                <b>검색된 머미 {store.matched_theme_count}개</b>
-              </>
-            ) : null}{' '}
-            보러가기
+            {filtered
+              ? `검색된 머미 ${store.matched_theme_count}개`
+              : `머미 ${store.total_theme_count}개`}
           </span>
           <ChevronRightIcon />
         </button>

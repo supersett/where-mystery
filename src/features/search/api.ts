@@ -6,7 +6,7 @@ import type { Database } from '@/types/database';
 type Client = SupabaseClient<Database>;
 
 export type SearchFilters = {
-  area: string;
+  area: string[];
   players: number | null;
   genres: string[];
   diffMin: number | null;
@@ -16,7 +16,7 @@ export type SearchFilters = {
 };
 
 const rpcArgs = (f: SearchFilters) => ({
-  p_area_slug: f.area,
+  p_area_slugs: f.area.length ? f.area : undefined,
   p_players: f.players ?? undefined,
   p_genres: f.genres.length ? f.genres : undefined,
   p_difficulty_min: f.diffMin ?? undefined,

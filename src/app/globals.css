@@ -1,12 +1,12 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf8f5; /* 웜 아이보리 */
+  --foreground: #1f1b16;
   color-scheme: light; /* 다크 모드는 추후 지원. 지금은 라이트 고정 */
 }
 
-/* 브랜드(프라이머리) 색 4종 — <html data-theme="..."> 로 전환. 기본은 인디고.
+/* 브랜드(프라이머리) 색 5종 — <html data-theme="..."> 로 전환. 기본은 와인.
    primary-600 = 주 색(버튼/강조), -50~300 = 연한 배경/테두리, -700 = 연한 배경 위 글자색, on-primary = 주 색 위 글자색 */
 :root[data-theme='red'] {
   --primary-50: #fef2f2;
@@ -38,7 +38,6 @@
   --primary-700: #115e59;
   --on-primary: #ffffff;
 }
-:root,
 :root[data-theme='indigo'] {
   --primary-50: #eef2ff;
   --primary-100: #e0e7ff;
@@ -48,6 +47,34 @@
   --primary-600: #3730a3;
   --primary-700: #312e81;
   --on-primary: #ffffff;
+}
+
+/* 기본 프라이머리: 와인(버건디) */
+:root,
+:root[data-theme='wine'] {
+  --primary-50: #fbf1f4;
+  --primary-100: #f7e1e8;
+  --primary-200: #efc5d2;
+  --primary-300: #e3a3b6;
+  --primary-500: #b83257;
+  --primary-600: #8a1f41;
+  --primary-700: #6b1631;
+  --on-primary: #ffffff;
+}
+
+/* 중성색을 따뜻한 톤으로 (Tailwind neutral-* 를 덮어씀) */
+@theme {
+  --color-neutral-50: #faf8f5;
+  --color-neutral-100: #f0ebe3;
+  --color-neutral-200: #e8e2d9;
+  --color-neutral-300: #d6cec2;
+  --color-neutral-400: #a39a8d;
+  --color-neutral-500: #7a7167;
+  --color-neutral-600: #5c554c;
+  --color-neutral-700: #453f37;
+  --color-neutral-800: #2e2a24;
+  --color-neutral-900: #1f1b16;
+  --color-neutral-950: #12100c;
 }
 
 @theme inline {

@@ -7,7 +7,7 @@ import {
 
 // 검색 필터 상태 = URL 쿼리스트링 (공유/뒤로가기/새로고침 유지)
 export const searchParsers = {
-  area: parseAsString.withDefault('seoul'),
+  area: parseAsArrayOf(parseAsString).withDefault([]), // 선택한 지역(여러 개). 비어 있으면 전체
   players: parseAsInteger,
   genres: parseAsArrayOf(parseAsString).withDefault([]),
   diffMin: parseAsInteger,
@@ -17,7 +17,7 @@ export const searchParsers = {
   theme: parseAsString, // 선택한 작품(slug) — 있으면 그 작품을 보유한 매장만
   store: parseAsString, // 선택한 매장(slug) — 있으면 그 매장의 보유 작품만
   tab: parseAsStringLiteral(['themes', 'stores'] as const).withDefault(
-    'themes',
+    'stores', // 첫 화면은 매장 탭
   ),
   view: parseAsStringLiteral(['map', 'list'] as const).withDefault('map'),
 };

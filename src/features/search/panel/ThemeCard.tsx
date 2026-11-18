@@ -11,7 +11,7 @@ export const themePlayersLabel = (
 // 인원 · 시간 · GM 필요 · 장르를 작은 칩으로 한 줄에 (없는 정보는 생략)
 export function ThemeChips({ theme }: { theme: ThemeResult }) {
   const chip =
-    'rounded-md bg-neutral-200/70 px-1.5 py-0.5 text-xs text-neutral-600';
+    'rounded-md bg-neutral-100 px-1.5 py-0.5 text-xs text-neutral-600';
   return (
     <div className="flex flex-wrap items-center gap-1">
       <span className={chip}>{themePlayersLabel(theme)}</span>
@@ -47,8 +47,10 @@ export function ThemeCard({
   return (
     <button
       onClick={onSelect}
-      className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left transition hover:bg-neutral-100 ${
-        active ? 'bg-primary-50 ring-primary-300 ring-1' : 'bg-neutral-50'
+      className={`flex w-full items-center gap-3 rounded-2xl border px-4 py-3 text-left transition ${
+        active
+          ? 'bg-primary-50 border-primary-300'
+          : 'border-neutral-200 bg-white shadow-[0_1px_2px_rgba(60,40,10,0.04)] hover:bg-neutral-50'
       }`}
     >
       <div className="min-w-0 flex-1 space-y-1.5">

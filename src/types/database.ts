@@ -134,10 +134,12 @@ export type Database = {
           images: string[];
           instagram_url: string | null;
           kakao_place_id: string | null;
-          naver_place_id: string | null;
           last_verified_at: string | null;
           location: unknown;
           name: string;
+          name_cho: string | null;
+          name_norm: string | null;
+          naver_place_id: string | null;
           opening_hours: Json | null;
           phone: string | null;
           slug: string;
@@ -153,10 +155,12 @@ export type Database = {
           images?: string[];
           instagram_url?: string | null;
           kakao_place_id?: string | null;
-          naver_place_id?: string | null;
           last_verified_at?: string | null;
           location: unknown;
           name: string;
+          name_cho?: string | null;
+          name_norm?: string | null;
+          naver_place_id?: string | null;
           opening_hours?: Json | null;
           phone?: string | null;
           slug: string;
@@ -172,10 +176,12 @@ export type Database = {
           images?: string[];
           instagram_url?: string | null;
           kakao_place_id?: string | null;
-          naver_place_id?: string | null;
           last_verified_at?: string | null;
           location?: unknown;
           name?: string;
+          name_cho?: string | null;
+          name_norm?: string | null;
+          naver_place_id?: string | null;
           opening_hours?: Json | null;
           phone?: string | null;
           slug?: string;
@@ -195,6 +201,9 @@ export type Database = {
       };
       themes: {
         Row: {
+          alias_cho: string | null;
+          alias_norm: string | null;
+          aliases: string[];
           cover_image: string | null;
           created_at: string;
           description: string | null;
@@ -208,9 +217,14 @@ export type Database = {
           slug: string;
           tags: string[];
           title: string;
+          title_cho: string | null;
+          title_norm: string | null;
           updated_at: string;
         };
         Insert: {
+          alias_cho?: string | null;
+          alias_norm?: string | null;
+          aliases?: string[];
           cover_image?: string | null;
           created_at?: string;
           description?: string | null;
@@ -224,9 +238,14 @@ export type Database = {
           slug: string;
           tags?: string[];
           title: string;
+          title_cho?: string | null;
+          title_norm?: string | null;
           updated_at?: string;
         };
         Update: {
+          alias_cho?: string | null;
+          alias_norm?: string | null;
+          aliases?: string[];
           cover_image?: string | null;
           created_at?: string;
           description?: string | null;
@@ -240,6 +259,8 @@ export type Database = {
           slug?: string;
           tags?: string[];
           title?: string;
+          title_cho?: string | null;
+          title_norm?: string | null;
           updated_at?: string;
         };
         Relationships: [];
@@ -249,9 +270,12 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      hangul_choseong: { Args: { t: string }; Returns: string };
+      search_norm: { Args: { t: string }; Returns: string };
+      search_norm_arr: { Args: { a: string[] }; Returns: string };
       search_pairs: {
         Args: {
-          p_area_slug?: string;
+          p_area_slugs?: string[];
           p_difficulty_max?: number;
           p_difficulty_min?: number;
           p_genres?: string[];
@@ -267,7 +291,7 @@ export type Database = {
       };
       search_stores: {
         Args: {
-          p_area_slug?: string;
+          p_area_slugs?: string[];
           p_difficulty_max?: number;
           p_difficulty_min?: number;
           p_genres?: string[];
@@ -285,20 +309,20 @@ export type Database = {
           area_id: string;
           area_name: string;
           id: string;
+          kakao_place_id: string;
           lat: number;
           lng: number;
           matched_theme_count: number;
           name: string;
+          naver_place_id: string;
           slug: string;
           thumbnail: string;
           total_theme_count: number;
-          kakao_place_id: string;
-          naver_place_id: string;
         }[];
       };
       search_themes: {
         Args: {
-          p_area_slug?: string;
+          p_area_slugs?: string[];
           p_difficulty_max?: number;
           p_difficulty_min?: number;
           p_genres?: string[];

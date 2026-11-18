@@ -2,7 +2,7 @@
 
 import { BRAND_THEMES, setBrandTheme, useBrandTheme } from '@/lib/brand-theme';
 
-// 헤더의 브랜드 색 선택: 색 점 4개
+// 헤더의 브랜드 색 선택: 색 점 5개
 export function ThemeToggle() {
   const { id } = useBrandTheme();
   return (

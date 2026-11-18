@@ -186,7 +186,7 @@ function ActiveThemeHeader({
     ...theme.genres,
   ].filter(Boolean);
   return (
-    <div className="flex shrink-0 items-center gap-2 border-b border-neutral-200 bg-white px-3 py-2.5">
+    <div className="flex shrink-0 items-center gap-2 border-b border-neutral-200 bg-background px-3 py-4">
       <button
         onClick={onClear}
         aria-label="전체 머미로 돌아가기"
@@ -222,7 +222,7 @@ function ActiveStoreHeader({
 }) {
   const total = store.total_theme_count;
   return (
-    <div className="flex shrink-0 items-center gap-2 border-b border-neutral-200 bg-white px-3 py-2.5">
+    <div className="flex shrink-0 items-center gap-2 border-b border-neutral-200 bg-background px-3 py-4">
       <button
         onClick={onClear}
         aria-label="전체 머미로 돌아가기"
